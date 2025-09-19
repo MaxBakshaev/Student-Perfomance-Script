@@ -1,24 +1,24 @@
-from abc import ABC
-from src.config import config
+from abc import ABC, abstractmethod
+from src.config import parced_args
 from src.csv_reader import get_csv_rows
 from src.students_report import get_students_average_table
 from src.table import Table
 
 
 class BaseReport(ABC):
-    def __init__(self):
-        """Аргументы командной строки"""
 
-        self.args = config.parsed_args()
+    @abstractmethod
+    def generate_report(self):
+        pass
 
 
-class StudentsPerfomanceReport(BaseReport):
+class StudentsPerformanceReport(BaseReport):
     def generate_report(self):
         """Создает отчет о средних оценках студентов"""
 
         # Добавление строк из CSV-файлов
         rows_list = []
-        for filename in self.args.files:
+        for filename in parced_args.files:
             rows_list.extend(get_csv_rows(filename))
 
         # Преобразование списка строк в таблицу со средними оценками студентов
@@ -28,21 +28,21 @@ class StudentsPerfomanceReport(BaseReport):
         Table.print_table(table)
 
 
-class TeachersPerfomanceReport(BaseReport):
+class TeachersPerformanceReport(BaseReport):
     def generate_report(self):
 
-        pass   # <- Точка расширения
+        pass  # <- Точка расширения
 
 
-class ReportGenerator(BaseReport):
-    def generate_report(self):
+class ReportGenerator:
+    def report_generator(self):
         """Создает отчет и выводит в консоль"""
 
-        if self.args.report == "students-performance":
-            rg = StudentsPerfomanceReport()
+        if parced_args.report == "students-performance":
+            rg = StudentsPerformanceReport()
 
-        elif self.args.report == "teachers-performance":
-            rg = TeachersPerfomanceReport()
+        elif parced_args.report == "teachers-performance":
+            rg = TeachersPerformanceReport()
 
         rg.generate_report()
 
