@@ -1,4 +1,4 @@
-$ python3 main.py --files students1.csv students2.csv --report students-performance
+$ python main.py --files students1.csv students2.csv --report students-performance
 +----+------------------------+-------+
 |    | student_name           | grade |
 +----+------------------------+-------+
@@ -12,3 +12,19 @@ $ python3 main.py --files students1.csv students2.csv --report students-performa
 |  8 | Фомина Ксения          |   3.7 |
 |  9 | Кузнецова Анна         |   3.5 |
 +----+------------------------+-------+
+
+
+python main.py --help
+
+
+python main.py --files students1.csv --report students-performance
+python main.py --files students2.csv --report students-performance
+python main.py --files students3.csv --report students-performance
+
+python main.py --files students1.csv students2.csv --report students-performance
+
+python main.py --files students1.csv students2.csv students3.csv --report students-performance
+
+python main.py --files students1.csv students2.csv students3.csv students4.csv --report students-performance
+
+python main.py --files students1.csv students2.csv students3.csv students4.csv students5.csv --report students-performance
