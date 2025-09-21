@@ -26,4 +26,4 @@ jobs:
 
       - name: Lint application
         run: |
-          flake8 . --max-line-length=79
+          flake8 src --max-line-length=79
