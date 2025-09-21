@@ -1,8 +1,6 @@
 from collections import defaultdict
 from typing import Dict, List, Tuple
 
-from src.settings import StudentsTable
-
 
 def get_students_average_marks_table(
     rows_list: List[List[str]],
@@ -45,5 +43,4 @@ def get_students_average_marks_table(
         for i, (name, avg)
         in enumerate(avg_grades_sorted)
     ]
-
-    return StudentsTable(table)
+    return table

@@ -1,7 +1,7 @@
 __all__ = (
-    "parced_args",
+    "config",
     "StudentsTable",
 )
 
-from .config import parced_args
+from .config import config
 from .table import StudentsTable
