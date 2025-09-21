@@ -42,4 +42,3 @@ class Config:
 
 
 config = Config()
-parced_args = config.parsed_args()
