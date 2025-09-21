@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from src.config import parced_args
-from src.csv_reader import get_csv_rows
-from src.students_report import get_students_average_marks_table
+
+from src.settings import parced_args
+from src.csv import get_csv_rows
+from src.students import get_students_average_marks_table
 
 
 class BaseReport(ABC):
