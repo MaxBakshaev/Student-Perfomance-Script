@@ -33,9 +33,12 @@ python main.py --files students1.csv students2.csv --report students-performance
 python main.py --files students1.csv students2.csv students3.csv students4.csv students5.csv --report students-performance
 ```
 
+### 🔹 4. Запуск тестов:
+```
+make test
+```
+
 ## 📊 Добавление новых отчетов на примере `teachers-performance`:
-
-
 
 ### 1. Добавить в `config.py` название отчета:
 
@@ -51,13 +54,14 @@ class TeachersTable(BaseTable):
 ```
 
 ### 3. Создать файл `teachers-report.py`, в котором нужно написать логику аналогично students-report.py:
-Функция `get_teachers_some_params_table` будет получать на вход список из списков параметров строк из файлов .csv, и возвращать объект TeachersTable(table), в который передается аргумент table - отсортированный по нужным параметрам список кортежей;
+Функция `get_teachers_some_params_table` будет получать на вход список из списков параметров строк из файлов .csv, и возвращать отсортированный по нужным параметрам список кортежей;
 
 ### 4. Добавить в `report.py`:
 ```
 class TeachersPerformanceReport(BaseReport):
     def build_table(self, rows_list):
-        return get_teachers_some_params_table(rows_list)
+        table = get_teachers_some_params_table(rows_list)
+        return TeachersTable(table)
 
 class ReportGenerator:
     def report_generator(self):
