@@ -33,7 +33,34 @@ python main.py --files students1.csv students2.csv --report students-performance
 python main.py --files students1.csv students2.csv students3.csv students4.csv students5.csv --report students-performance
 ```
 
-написать то, что на ваш взгляд важно знать ревьюеру
+## 📊 Добавление новых отчетов на примере `teachers-performance`:
 
 
-описание того как добавить новый отчет.
+
+### 1. Добавить в `config.py` название отчета:
+
+self.allowed_reports = [..., "teachers-performance",]
+
+
+### 2. Добавить в `table.py`:
+```
+class TeachersTable(BaseTable):
+    headers = "ваше_значение"
+    tablefmt = "ваше_значение"
+    colalign = "ваше_значение"
+```
+
+### 3. Создать файл `teachers-report.py`, в котором нужно написать логику аналогично students-report.py:
+Функция `get_teachers_some_params_table` будет получать на вход список из списков параметров строк из файлов .csv, и возвращать объект TeachersTable(table), в который передается аргумент table - отсортированный по нужным параметрам список кортежей;
+
+### 4. Добавить в `report.py`:
+```
+class TeachersPerformanceReport(BaseReport):
+    def build_table(self, rows_list):
+        return get_teachers_some_params_table(rows_list)
+
+class ReportGenerator:
+    def report_generator(self):
+        elif parced_args.report == "teachers-performance":
+            rg = TeachersPerformanceReport()
+```

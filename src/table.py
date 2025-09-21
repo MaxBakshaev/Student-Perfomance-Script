@@ -1,27 +1,41 @@
+from abc import ABC
 from tabulate import tabulate
 from typing import List, Tuple
 
 
-class Table:
+class BaseTable(ABC):
     """
     Документация tabulate: https://github.com/astanin/python-tabulate
 
     Настройки таблицы
     """
 
-    headers: List[str] = [" ", "student_name", "grade"]
-    tablefmt: str = "pretty"
-    colalign: Tuple[str, str, str] = ("right", "left", "right")
+    headers: List[str]
+    tablefmt: str
+    colalign: Tuple[str, ...]
 
-    @classmethod
-    def print_table(cls, table: List[Tuple[int, str, int]]) -> None:
+    def __init__(self, table: List[Tuple]):
+        self.table = table
+
+    def print(self):
         """Выводит таблицу в консоль"""
-
         print(
             tabulate(
-                table,
-                headers=cls.headers,
-                tablefmt=cls.tablefmt,
-                colalign=cls.colalign,
+                self.table,
+                headers=self.headers,
+                tablefmt=self.tablefmt,
+                colalign=self.colalign,
             )
         )
+
+
+class StudentsTable(BaseTable):
+    headers = [" ", "student_name", "grade"]
+    tablefmt = "pretty"
+    colalign = ("right", "left", "right")
+
+
+# class TeachersTable(BaseTable):
+    # headers = ...
+    # tablefmt = ...
+    # colalign = ...

@@ -1,37 +1,38 @@
 from abc import ABC, abstractmethod
 from src.config import parced_args
 from src.csv_reader import get_csv_rows
-from src.students_report import get_students_average_table
-from src.table import Table
+from src.students_report import get_students_average_marks_table
 
 
 class BaseReport(ABC):
 
-    @abstractmethod
     def generate_report(self):
-        pass
-
-
-class StudentsPerformanceReport(BaseReport):
-    def generate_report(self):
-        """Создает отчет о средних оценках студентов"""
-
         # Добавление строк из CSV-файлов
         rows_list = []
         for filename in parced_args.files:
             rows_list.extend(get_csv_rows(filename))
 
-        # Преобразование списка строк в таблицу со средними оценками студентов
-        table = get_students_average_table(rows_list)
+        # Создание таблицы отчета
+        report_table = self.build_table(rows_list)
+        # Вывод в консоль
+        report_table.print()
 
-        # Вывод таблицы в консоль
-        Table.print_table(table)
+    @abstractmethod
+    def build_table(self, rows_list):
+        """Преобразование списка строк в таблицу с кастомными параметрами"""
+        pass
 
 
-class TeachersPerformanceReport(BaseReport):
-    def generate_report(self):
+class StudentsPerformanceReport(BaseReport):
+    def build_table(self, rows_list):
+        """Создание отчета о средних оценках студентов"""
 
-        pass  # <- Точка расширения
+        return get_students_average_marks_table(rows_list)
+
+
+# class TeachersPerformanceReport(BaseReport):
+#     def build_table(self, rows_list):
+#         return get_teachers_some_params_table(rows_list)
 
 
 class ReportGenerator:
@@ -41,8 +42,8 @@ class ReportGenerator:
         if parced_args.report == "students-performance":
             rg = StudentsPerformanceReport()
 
-        elif parced_args.report == "teachers-performance":
-            rg = TeachersPerformanceReport()
+        # elif parced_args.report == "teachers-performance":
+        #     rg = TeachersPerformanceReport()
 
         rg.generate_report()
 

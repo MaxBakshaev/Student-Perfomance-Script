@@ -7,7 +7,12 @@ class Config:
     def __init__(self):
         self.prog: str = "students-performance"
         self.description: str = "Скрипт для анализа успеваемости студентов"
-        self.allowed_reports = ["students-performance"]  # добавление отчетов
+
+        # добавление отчетов
+        self.allowed_reports = [
+            "students-performance",
+            # "teachers-performance",
+        ]
 
     def parsed_args(self):
         """
