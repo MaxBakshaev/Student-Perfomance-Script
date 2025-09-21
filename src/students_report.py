@@ -40,6 +40,10 @@ def get_students_average_marks_table(
     avg_grades_sorted = sorted(avg_grades, key=lambda x: x[1], reverse=True)
 
     # добавление нумерации
-    table = [(i + 1, name, avg) for i, (name, avg) in enumerate(avg_grades_sorted)]
+    table = [
+        (i + 1, name, avg)
+        for i, (name, avg)
+        in enumerate(avg_grades_sorted)
+    ]
 
     return StudentsTable(table)
