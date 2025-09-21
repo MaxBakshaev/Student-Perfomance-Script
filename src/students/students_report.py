@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import Dict, List, Tuple
 
-from src.table import StudentsTable
+from src.settings import StudentsTable
 
 
 def get_students_average_marks_table(
